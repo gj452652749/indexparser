@@ -16,6 +16,17 @@ public class ParserPipeline {
 	public void setMiddle(ParserValue middle) {
 		this.middle = middle;
 	}
+	public void addMiddle(ParserValue middleValue) {
+		ParserValue current=middle;
+		while(current!=null) {
+			if(current.next==basic) {
+				current.setNext(middleValue);
+				middleValue.setNext(basic);
+				break;
+			}
+			current=current.next;
+		}
+	}
 	public ParserValue getBasic() {
 		return basic;
 	}
