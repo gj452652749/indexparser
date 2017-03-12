@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zkyunso.db.mybatis.dao.ParserTaskMapper">
+	<resultMap type="ParserTask" id="ParserTaskResult">
+		<result column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="remark" property="remark"/>
+		<result column="configJsonId" property="configJsonId"/>
+		<result column="createTime" property="createTime"/>
+	</resultMap>
+
+	<!-- 取得插入数据后的id -->
+	<insert id="save" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+		insert into parser_task(name,remark,configJsonId)
+		values(#{name},#{remark},#{configJsonId})
+	</insert>
+
+	<update id="update">
+		update parser_task
+		set name = #{name},
+			remark = #{remark},
+			configJsonId = #{configJsonId},
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from parser_task
+		where id = #{id}
+	</delete>
+
+	<select id="getById" resultMap="ParserTaskResult">
+		select *
+		from parser_task
+		where id = #{id}
+	</select>
+	
+	<select id="getAll" resultMap="ParserTaskResult">
+		select * 
+		from parser_task
+	</select>
+</mapper>
